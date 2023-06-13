@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.unicauca</groupId>
-	<artifactId>openmarket</artifactId>
+	<artifactId>openmarketConsumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>openmarket</name>
-	<description>open market Demo project for Spring Boot</description>
+	<name>openmarketConsumer</name>
+	<description>openmarket consumer demo</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
