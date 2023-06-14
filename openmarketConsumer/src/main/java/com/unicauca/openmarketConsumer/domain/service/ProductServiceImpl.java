@@ -1,78 +1,89 @@
 
 package com.unicauca.openmarketConsumer.domain.service;
 
-import com.unicauca.openmarketConsumer.domain.entity.Product;
-import com.unicauca.openmarketConsumer.access.dao.IProductRepository;
 import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.unicauca.openmarketConsumer.access.dao.IProductRepository;
+import com.unicauca.openmarketConsumer.domain.entity.Product;
 
-/**
- *
- * @author brayan
- */
-
-@Service//para que sea un servcio de spring
-public class ProductServiceImpl implements IProductService{
-
-    
-    @Autowired//para que se inyecte el repositorio
+@Service // Para que sea un componente de Spring
+public class ProductServiceImpl implements IProductEventService {
+    @Autowired // Inyecta una dependencia
     private IProductRepository repository;
+
     /**
-     * servicio para buscar todos los productos
-     * @return listado de productos
+     * Busca todos los evento de productos
+     * 
+     * @return Lista de evento de productos
      */
     @Override
-    @Transactional(readOnly=true)//para que este sincronizada con la base de datos
+    @Transactional(readOnly = true)
     public List<Product> findAll() {
-       return (List<Product>)repository.findAll();
+        return (List<Product>) repository.findAll();
     }
+
     /**
-     * servicio para buscar un producto por su id
-     * @param Id identificador 
-     * @return objeto del tipo producto
+     * Busca un evento de producto por su id
+     * 
+     * @param id id del evento de producto
+     * @return evento de producto
      */
     @Override
     @Transactional
-    public Product find(Long Id) {
-        Product prod=repository.findById(Id).orElse(null);
-        return prod;
+    public Product find(Long id) {
+        Product product = repository.findById(id).orElse(null);
+        return product;
     }
+
     /**
-     * servicio para crea un nuevo producto
-     * @param product producto a crer en la bd
-     * @return producto creado
+     * Crea un evento de producto
+     * 
+     * @param product evento de producto a crear
+     * @return evento de producto creado
      */
     @Override
     @Transactional
     public Product create(Product product) {
-        return repository.save(product);
+
+        // Save the product
+        Product savedProduct = repository.save(product);
+        // Send the event message
+        return savedProduct;
+
     }
+
     /**
-     * servicio para editar un producto
-     * @param id ide del producto
-     * @param product datos del producto
-     * @return objeto tipo producto
+     * Actualiza un evento de producto
+     * 
+     * @param id      id del evento de producto
+     * @param product evento de producto a actualizar
+     * @return evento de producto actualizado
      */
-    
     @Override
     @Transactional
     public Product update(Long id, Product product) {
-       Product prod=this.find(id);
-       prod.setName(product.getName());
-       prod.setPrice(product.getPrice());
-       return repository.save(prod);
+        Product productUpdate = this.find(id);
+        productUpdate.setName(product.getName());
+        productUpdate.setPrice(product.getPrice());
+        // Save the product
+        Product updateProduct = repository.save(productUpdate);
+        // Send the event message
+        return updateProduct;
     }
+
     /**
-     * Servivio para elimiunar un producto por id
-     * @param id el id del producto a eliminar
+     * Elimina un evento de producto
+     * 
+     * @param id id del evento de producto
      */
     @Override
     @Transactional
     public void delete(Long id) {
-      repository.deleteById(id);
+
+        repository.deleteById(id);
     }
-    
 }
