@@ -9,7 +9,7 @@ import com.rabbitmq.client.DeliverCallback;
 import java.nio.charset.StandardCharsets;
 
 public class RabbitMQConsumer {
-    private final static String EXCHANGE_NAME = "OMProducts";
+    private final static String EXCHANGE_NAME = "logs";
     private final EventLogService eventService;
 
     public RabbitMQConsumer(){
