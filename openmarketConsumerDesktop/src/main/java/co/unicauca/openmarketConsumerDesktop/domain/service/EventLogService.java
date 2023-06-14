@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -38,11 +40,14 @@ public class EventLogService implements IEventLogService {
     @Override
     public void appendRow(String[] processedMessage) {
         try {
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile, true), StandardCharsets.UTF_8));
-            CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader("ACTION", "IDPRODUCT", "PRODUCT NAME", "PRICE","DESCRIPTION");
-            CSVPrinter csvPrinter = new CSVPrinter(writer, csvFormat);
+ String[] valor = processedMessage;
+            FileWriter escritor = new FileWriter(logFile, true); // El segundo parámetro 'true' indica que se agregará al final del archivo existente
+            PrintWriter pw = new PrintWriter(escritor);
+            CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader("");
+            CSVPrinter csvPrinter = new CSVPrinter(pw, csvFormat);
 
-            csvPrinter.printRecord(processedMessage[0], processedMessage[1], processedMessage[2], processedMessage[3], processedMessage[4]);
+            // Escribir los datos en el archivo CSV
+            csvPrinter.printRecord(processedMessage[0],processedMessage[1],processedMessage[2],processedMessage[3],processedMessage[4]);
 
             csvPrinter.flush();
             csvPrinter.close();
