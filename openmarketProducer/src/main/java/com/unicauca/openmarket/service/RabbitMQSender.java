@@ -1,6 +1,7 @@
 
 package com.unicauca.openmarket.service;
 
+import com.unicauca.openmarket.config.IRabbitMQConfig;
 import com.unicauca.openmarket.config.RabbitMQConfig;
 import com.unicauca.openmarket.domain.entity.Product;
 import javax.swing.JOptionPane;
@@ -8,7 +9,7 @@ import javax.swing.JOptionPane;
 
 
 public class RabbitMQSender {
-    private RabbitMQConfig rabbitconfig;
+    private IRabbitMQConfig rabbitconfig;
 
     public RabbitMQSender() {
         this.rabbitconfig = new RabbitMQConfig();
