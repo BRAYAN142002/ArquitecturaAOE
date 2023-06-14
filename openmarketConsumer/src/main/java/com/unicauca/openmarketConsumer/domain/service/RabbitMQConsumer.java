@@ -11,8 +11,6 @@ public class RabbitMQConsumer {
 
     private IProductEventService actionsService;
 
-    private Product actProduct;
-
     public RabbitMQConsumer(IProductEventService actionsService){
         this.actionsService = actionsService;
     }
@@ -24,14 +22,17 @@ public class RabbitMQConsumer {
         Long id = Long.parseLong(split[1]);
         String name = split[2];
         Double price = Double.parseDouble(split[3]);
-        this.actProduct = new Product(id,name,price,action);
+        Product producto = new Product();
+        producto.setId(id);
+        producto.setName(name);
+        producto.setPrice(price);
         
         switch (action) {
             case "POST":
-                this.actionsService.create(actProduct);
+                this.actionsService.create(producto);
                 break;
             case "PUT":
-                this.actionsService.update(id,actProduct);
+                this.actionsService.update(id,producto);
                 break;
             case "DELETE":
                 this.actionsService.delete(id);
