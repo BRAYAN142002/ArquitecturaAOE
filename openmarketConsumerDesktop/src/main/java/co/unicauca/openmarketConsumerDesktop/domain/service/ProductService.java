@@ -8,10 +8,10 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-public class EventLogService implements IEventLogService {
+public class ProductService implements IProductService {
     private final File logFile;
 
-    public EventLogService() {
+    public ProductService() {
         this.logFile = new File("productActionsCSV.csv");
         initializeFile();
     }

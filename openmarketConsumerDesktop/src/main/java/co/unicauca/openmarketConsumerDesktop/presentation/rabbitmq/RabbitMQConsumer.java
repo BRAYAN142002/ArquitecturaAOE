@@ -1,17 +1,17 @@
 package co.unicauca.openmarketConsumerDesktop.presentation.rabbitmq;
 
 import co.unicauca.openmarketconsumerDesktop.domain.Constants;
-import co.unicauca.openmarketConsumerDesktop.domain.service.EventLogService;
+import co.unicauca.openmarketConsumerDesktop.domain.service.ProductService;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 
 import java.nio.charset.StandardCharsets;
 
 public class RabbitMQConsumer {
-    private final EventLogService eventService;
+    private final ProductService eventService;
 
     public RabbitMQConsumer() {
-        this.eventService = new EventLogService();
+        this.eventService = new ProductService();
     }
 
     public void startConsuming(Channel channel) throws Exception {

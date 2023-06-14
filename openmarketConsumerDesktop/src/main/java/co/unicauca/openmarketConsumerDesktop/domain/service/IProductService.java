@@ -1,6 +1,6 @@
 package co.unicauca.openmarketConsumerDesktop.domain.service;
 
-public interface IEventLogService {
+public interface IProductService {
     String[]  parseMessage(String message);
     void appendRow(String[] processedMessage);
 }
