@@ -21,6 +21,13 @@ public class EventLogService implements IEventLogService {
             } else {
                 this.logFile.createNewFile();
                 System.out.println("Archivo productActionsCSV creado correctamente.");
+
+                // Agrega las cabeceras al archivo recién creado
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile, true), StandardCharsets.UTF_8));
+                CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader("ACTION", "IDPRODUCT", "PRODUCT NAME", "PRICE", "DESCRIPTION");
+                CSVPrinter csvPrinter = new CSVPrinter(writer, csvFormat);
+                csvPrinter.flush();
+                csvPrinter.close();
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -39,7 +46,8 @@ public class EventLogService implements IEventLogService {
     public void appendRow(String[] processedMessage) {
         try {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile, true), StandardCharsets.UTF_8));
-            CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader("ACTION", "IDPRODUCT", "PRODUCT NAME", "PRICE","DESCRIPTION");
+            // Utiliza CSVFormat.DEFAULT sin cabeceras
+            CSVFormat csvFormat = CSVFormat.DEFAULT;
             CSVPrinter csvPrinter = new CSVPrinter(writer, csvFormat);
 
             csvPrinter.printRecord(processedMessage[0], processedMessage[1], processedMessage[2], processedMessage[3], processedMessage[4]);
