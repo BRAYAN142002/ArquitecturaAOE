@@ -5,12 +5,11 @@
  */
 package com.unicauca.openmarketConsumer.presentation.rest;
 
-import com.unicauca.openmarketConsumer.domain.service.IProductService;
+import com.unicauca.openmarketConsumer.domain.service.IProductEventService;
 import com.unicauca.openmarketConsumer.domain.entity.Product;
-import com.unicauca.openmarketConsumer.access.dao.IProductRepository;
+
 
 import java.util.List;
-import static org.hibernate.criterion.Projections.id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class ProductsController {
     @Autowired
-    private IProductService productService;
+    private IProductEventService productService;
     
     @RequestMapping(method=RequestMethod.GET, produces="application/json")
     @ResponseBody//para que se convierta a json
