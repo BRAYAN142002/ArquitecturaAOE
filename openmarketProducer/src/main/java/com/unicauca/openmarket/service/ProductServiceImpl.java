@@ -19,7 +19,7 @@ public class ProductServiceImpl implements IProductService{
     
     @Autowired//para que se inyecte el repositorio
     private IProductRepository repository;
-    private RabbitMQSender rabbit;
+    private RabbitMQSender rabbit=new RabbitMQSender ();
     /**
      * servicio para buscar todos los productos
      * @return listado de productos

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class RabbitMQConfig implements IRabbitMQConfig {
     private static final String EXCHANGE_NAME = "logs";
 
-    @Override
+   @Override
     public void connection(Product product, String action) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(Constants.HOST_NAME);

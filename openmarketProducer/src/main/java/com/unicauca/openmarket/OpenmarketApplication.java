@@ -9,5 +9,4 @@ public class OpenmarketApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OpenmarketApplication.class, args);
 	}
-
 }

@@ -1,4 +1,4 @@
-package co.unicauca.openmarketConsumerCSV.domain.service;
+package co.unicauca.openmarketConsumerDesktop.domain.service;
 
 public interface IEventLogService {
     String[]  parseMessage(String message);
