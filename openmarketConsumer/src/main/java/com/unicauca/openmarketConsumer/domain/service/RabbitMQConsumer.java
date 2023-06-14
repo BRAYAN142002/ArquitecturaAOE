@@ -1,35 +1,44 @@
 
 package com.unicauca.openmarketConsumer.domain.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import com.unicauca.openMarketConsumer.config.RabbitMQConfig;
+import org.springframework.stereotype.Service;
+
 import com.unicauca.openmarketConsumer.domain.entity.Product;
 
-import org.springframework.amqp.AmqpRejectAndDontRequeueException;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-
-@Component
+@Service
 public class RabbitMQConsumer {
-    @Autowired
-    IProductEventService productLogService;
 
-    @RabbitListener(queues = RabbitMQConfig.QUEUE)
-    public void consumeMessageFromQueue(String message) {
-        System.out.println("Message recieved from queue : " + message);
-        Product product = new Product();
-        String[] parts = message.split(",");
-        if (parts.length == 4) {
-            try {
-                product.setId(Long.parseLong(parts[0]));
-                product.setName(parts[1]);
-                product.setPrice(Double.parseDouble(parts[2]));
-                product.setAction(parts[3]);
-                productLogService.create(product);
-            } catch (Exception e) {
-                throw new AmqpRejectAndDontRequeueException(e);
-            }
+    private IProductEventService actionsService;
+
+    private Product actProduct;
+
+    public RabbitMQConsumer(IProductEventService actionsService){
+        this.actionsService = actionsService;
+    }
+       
+    public void procesarMensaje (String mensaje){
+        
+        String [] split = mensaje.split(",");
+        String action = split[0];
+        Long id = Long.parseLong(split[1]);
+        String name = split[2];
+        Double price = Double.parseDouble(split[3]);
+        this.actProduct = new Product(id,name,price,action);
+        
+        switch (action) {
+            case "POST":
+                this.actionsService.create(actProduct);
+                break;
+            case "PUT":
+                this.actionsService.update(id,actProduct);
+                break;
+            case "DELETE":
+                this.actionsService.delete(id);
+                break;
+            default:
+                System.out.println("Error! Action not found");
+                break;
         }
     }
 }
