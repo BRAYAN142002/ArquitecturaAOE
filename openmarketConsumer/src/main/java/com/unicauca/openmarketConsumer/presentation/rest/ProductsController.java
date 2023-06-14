@@ -5,8 +5,9 @@
  */
 package com.unicauca.openmarketConsumer.presentation.rest;
 
-import com.unicauca.openmarket.domain.entity.Product;
-import com.unicauca.openmarketConsumer.domain.IProductService;
+import com.unicauca.openmarketConsumer.domain.service.IProductService;
+import com.unicauca.openmarketConsumer.domain.entity.Product;
+import com.unicauca.openmarketConsumer.access.dao.IProductRepository;
 
 import java.util.List;
 import static org.hibernate.criterion.Projections.id;

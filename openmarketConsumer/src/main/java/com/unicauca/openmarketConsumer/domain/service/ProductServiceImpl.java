@@ -1,14 +1,13 @@
 
-package com.unicauca.openmarketConsumer.domain;
+package com.unicauca.openmarketConsumer.domain.service;
 
-
-import com.unicauca.openmarket.domain.entity.Product;
-import com.unicauca.openmarket.service.IProductService;
+import com.unicauca.openmarketConsumer.domain.entity.Product;
 import com.unicauca.openmarketConsumer.access.dao.IProductRepository;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
  *
@@ -63,7 +62,6 @@ public class ProductServiceImpl implements IProductService{
     public Product update(Long id, Product product) {
        Product prod=this.find(id);
        prod.setName(product.getName());
-        prod.setDescription(product.getDescription());
        prod.setPrice(product.getPrice());
        return repository.save(prod);
     }

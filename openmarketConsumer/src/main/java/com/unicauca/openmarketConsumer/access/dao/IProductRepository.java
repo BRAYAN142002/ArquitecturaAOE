@@ -1,7 +1,7 @@
 
 package com.unicauca.openmarketConsumer.access.dao;
 
-import com.unicauca.openmarket.domain.entity.Product;
+import com.unicauca.openmarketConsumer.domain.entity.Product;
 import org.springframework.data.repository.CrudRepository;
 
 /**
