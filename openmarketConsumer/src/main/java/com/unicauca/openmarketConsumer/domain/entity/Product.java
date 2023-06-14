@@ -23,8 +23,14 @@ import lombok.Data;
 
 public class Product  implements Serializable{
    
-   private static final long serialVersionUID=1L; 
+   //private static final long serialVersionUID=1L; 
    
+    public Product(Long id, String name, Double price, String action) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.action = action;
+    }
    @Id//esta va ser nuestra primary key
    @GeneratedValue(strategy=GenerationType.IDENTITY)//esto hace que la variable sea auto incremental
    private Long id;
