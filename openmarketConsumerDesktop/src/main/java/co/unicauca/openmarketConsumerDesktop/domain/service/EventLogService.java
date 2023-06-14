@@ -1,4 +1,4 @@
-package co.unicauca.openmarketConsumerCSV.domain.service;
+package co.unicauca.openmarketConsumerDesktop.domain.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -39,10 +39,10 @@ public class EventLogService implements IEventLogService {
     public void appendRow(String[] processedMessage) {
         try {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile, true), StandardCharsets.UTF_8));
-            CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader("ACTION", "ID", "PRODUCT NAME", "PRICE");
+            CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader("ACTION", "IDPRODUCT", "PRODUCT NAME", "PRICE","DESCRIPTION");
             CSVPrinter csvPrinter = new CSVPrinter(writer, csvFormat);
 
-            csvPrinter.printRecord(processedMessage[0], processedMessage[1], processedMessage[2], processedMessage[3]);
+            csvPrinter.printRecord(processedMessage[0], processedMessage[1], processedMessage[2], processedMessage[3], processedMessage[4]);
 
             csvPrinter.flush();
             csvPrinter.close();
